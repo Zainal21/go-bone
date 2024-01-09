@@ -1,0 +1,10 @@
+dugong
+bin
+.env
+.idea
+.DS_Store
+vendor
+go.sum
+.vscode
+docs/
+storage/

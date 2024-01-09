@@ -1,0 +1,10 @@
+{
+  "app_name": "fiber_golang",
+  "app_host": "0.0.0.0",
+  "app_port": 8991,
+  "app_logger_debug": false,
+  "app_logger_level": "debug",
+  "app_env": "local",
+  "app_otel_trace": false,
+  "app_otel_exporter": ""
+}
