@@ -63,7 +63,6 @@ func (rtr *router) Route() {
 
 	//define controller
 	getAllUser := user.NewGetAllUser(userSvc)
-	storeUser := user.NewStoreUser(userSvc)
 	getTodos := todo.NewGetTodo(example)
 
 	health := controller.NewGetHealth()
@@ -79,13 +78,6 @@ func (rtr *router) Route() {
 		getAllUser,
 		//middleware
 		basicMiddleware.Authenticate,
-	))
-
-	internalV1.Post("/users", rtr.handle(
-		handler.HttpRequest,
-		storeUser,
-		//middleware
-		// basicMiddleware.Authenticate,
 	))
 
 	internalV1.Get("/todos", rtr.handle(
