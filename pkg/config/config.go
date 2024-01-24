@@ -18,6 +18,7 @@ import (
 type Config struct {
 	AppConfig      `mapstructure:",squash"`
 	DatabaseConfig `mapstructure:",squash"`
+	CacheConfig    `mapstructure:",squash"`
 }
 
 func LoadAllConfigs() (*Config, error) {
