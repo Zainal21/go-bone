@@ -17,10 +17,6 @@ func Execute(db *sqlx.DB, seedMethodNames ...string) {
 
 	seederTable := []map[string]interface{}{
 		{"name": "UserSeeder"},
-		{"name": "PermissionSeeder"},
-		{"name": "RoleSeeder"},
-		{"name": "ModelHasPermissionSeeder"},
-		{"name": "ModelHasRoleSeeder"},
 	}
 
 	if len(seedMethodNames) == 0 {

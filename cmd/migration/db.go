@@ -23,7 +23,6 @@ func MigrateDatabase() {
 	mysql.DatabaseMigration(cfg)
 }
 
-
 func SeedDatabase() {
 	cfg, err := config.LoadAllConfigs()
 
@@ -46,4 +45,3 @@ func SeedDatabase() {
 		}
 	}
 }
-

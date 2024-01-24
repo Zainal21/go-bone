@@ -4,9 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/Zainal21/go-bone/internal/router"
+	"github.com/Zainal21/go-bone/app/router"
 
-	"github.com/Zainal21/go-bone/internal/bootstrap"
 	"github.com/Zainal21/go-bone/pkg/config"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -24,12 +23,6 @@ var appServer *App
 
 func InitializeApp(cfg *config.Config) {
 	// boostrap run and initialize package dependency
-	bootstrap.RegistryLogger(cfg)
-	otelManager, err := bootstrap.RegistryOpenTelemetry(cfg)
-	if err != nil {
-		otelManager.Close()
-	}
-
 	f := fiber.New(cfg.FiberConfig())
 	f.Use(
 		cors.New(cors.Config{

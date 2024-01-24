@@ -4,9 +4,6 @@ build:
 
 run-http:
 	@./bin/${BINARY_NAME} http
-
-run-rabbit:
-	@./bin/${BINARY_NAME} http
 	
 install:
 	@echo "Installing dependencies...."
@@ -18,6 +15,11 @@ install:
 start-http:
 	@go run main.go http
 
+
+start-rabbit-mq:
+	@go run main.go rabbit
+
+	
 start-rabbit-mq:
 	@go run main.go rabbit
 

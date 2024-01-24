@@ -14,13 +14,11 @@ There is some dependencies that we used in this skeleton:
 - [Logrus Logger](https://github.com/sirupsen/logrus) [Go Logger]
 - [Goose Migration](https://github.com/pressly/goose) [Go Migration]
 - [Gobreaker](https://github.com/sony/gobreaker) [Go Circuit Breaker]
-- [OpenTelemetry](https://pkg.go.dev/go.opentelemetry.io/otel) [OpenTelemetry Tracer]
 
 ## Requirement
 
 - Golang version 1.21 or latest
 - Database MySQL
-- RabbitMQ
 
 ## Usage
 

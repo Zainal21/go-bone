@@ -6,7 +6,7 @@ import (
 	"errors"
 	"io/ioutil"
 
-	"github.com/Zainal21/go-bone/internal/consts"
+	"github.com/Zainal21/go-bone/app/consts"
 	"github.com/Zainal21/go-bone/pkg/util"
 )
 
