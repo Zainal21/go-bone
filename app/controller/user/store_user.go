@@ -4,7 +4,7 @@ import (
 	"github.com/Zainal21/go-bone/app/appctx"
 	"github.com/Zainal21/go-bone/app/controller/contract"
 	"github.com/Zainal21/go-bone/app/service"
-	"github.com/gofiber/fiber/v2"
+	"github.com/Zainal21/go-bone/pkg/tracer"
 )
 
 type storeUser struct {
@@ -12,7 +12,11 @@ type storeUser struct {
 }
 
 func (g *storeUser) Serve(xCtx appctx.Data) appctx.Response {
-	return *appctx.NewResponse().WithCode(fiber.StatusNotFound).WithMessage("Resource Not Found")
+	ctx, span := tracer.NewSpan(xCtx.FiberCtx.Context(), "Controller.CreateUser", nil)
+	defer span.End()
+
+	res := g.service.StoreUser(ctx)
+	return res
 }
 
 func NewStoreUser(svc service.UserService) contract.Controller {

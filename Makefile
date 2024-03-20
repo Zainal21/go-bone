@@ -1,8 +1,11 @@
-BINARY_NAME=go-bone-boilerplate
+BINARY_NAME=skeleton
 build:
 	@go build -o bin/${BINARY_NAME} main.go
 
 run-http:
+	@./bin/${BINARY_NAME} http
+
+run-rabbit:
 	@./bin/${BINARY_NAME} http
 	
 install:
@@ -15,12 +18,7 @@ install:
 start-http:
 	@go run main.go http
 
-
-start-rabbit-mq:
-	@go run main.go rabbit
-
-	
-start-rabbit-mq:
+start-rabbit:
 	@go run main.go rabbit
 
 migrate:

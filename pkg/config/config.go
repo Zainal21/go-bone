@@ -18,7 +18,9 @@ import (
 type Config struct {
 	AppConfig      `mapstructure:",squash"`
 	DatabaseConfig `mapstructure:",squash"`
-	CacheConfig    `mapstructure:",squash"`
+	MongoDBConfig  `mapstructure:",squash"`
+	BrokerConfig   `mapstructure:",squash"`
+	GCPConfig      `mapstructure:",squash"`
 }
 
 func LoadAllConfigs() (*Config, error) {

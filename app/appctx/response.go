@@ -3,16 +3,22 @@ package appctx
 
 import (
 	"encoding/json"
+	"github.com/gofiber/fiber/v2"
 	"sync"
 	"time"
 
-	"github.com/gofiber/fiber/v2"
+	"github.com/google/uuid"
 )
 
 var (
 	rsp    *Response
 	oneRsp sync.Once
 )
+
+type ErrorResp struct {
+	Key      string   `json:"key,omitempty"`
+	Messages []string `json:"messages,omitempty"`
+}
 
 // Response presentation contract object
 type Response struct {
@@ -24,9 +30,18 @@ type Response struct {
 	Meta      interface{} `json:"meta,omitempty"`
 	Message   interface{} `json:"message,omitempty"`
 	Data      interface{} `json:"data,omitempty"`
-	Errors    interface{} `json:"errors,omitempty"`
+	Errors    []ErrorResp `json:"errors,omitempty"`
 	lang      string      `json:"-"`
 	msgKey    string
+}
+
+// MetaData represent meta data response for multi data
+type MetaData struct {
+	TransactionID uuid.UUID `json:"transaction_id,omitempty"`
+	Page          uint64    `json:"page,omitempty"`
+	Limit         uint64    `json:"limit,omitempty"`
+	TotalPage     uint64    `json:"total_page,omitempty"`
+	TotalCount    uint64    `json:"total_count,omitempty"`
 }
 
 // WithCode setter response var name
@@ -37,11 +52,6 @@ func (r *Response) WithCode(c int) *Response {
 		r.Status = false
 	}
 	r.Code = c
-	return r
-}
-
-func (r *Response) WithError(v interface{}) *Response {
-	r.Errors = v
 	return r
 }
 
@@ -60,6 +70,12 @@ func (r *Response) WithState(s string) *Response {
 // WithData setter data response
 func (r *Response) WithData(v interface{}) *Response {
 	r.Data = v
+	return r
+}
+
+// WithError setter error messages
+func (r *Response) WithError(v []ErrorResp) *Response {
+	r.Errors = v
 	return r
 }
 

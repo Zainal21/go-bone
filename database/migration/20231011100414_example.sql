@@ -1,8 +1,8 @@
 -- +goose Up
 -- +goose StatementBegin
-CREATE TABLE IF NOT EXISTS example
+CREATE TABLE IF NOT EXISTS users
 (
-    user_id char(36)     NOT NULL,
+    user_id INT          NOT NULL,
     name    VARCHAR(255) NOT NULL,
     age     INT          NOT NULL,
     PRIMARY KEY (user_id)
@@ -11,5 +11,5 @@ CREATE TABLE IF NOT EXISTS example
 
 -- +goose Down
 -- +goose StatementBegin
-DROP TABLE IF EXISTS example;
+DROP TABLE IF EXISTS users;
 -- +goose StatementEnd

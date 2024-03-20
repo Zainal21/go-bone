@@ -17,9 +17,11 @@ func (t todo) Serve(xCtx appctx.Data) appctx.Response {
 	todos, err := t.provider.GetTodos(xCtx.FiberCtx.Context())
 	if err != nil {
 		if err != nil {
-			return *appctx.NewResponse().WithError(map[string]interface{}{
-				"Message": "PROVIDER_ERR",
-				"Error":   []string{err.Error()},
+			return *appctx.NewResponse().WithError([]appctx.ErrorResp{
+				{
+					Key:      "PROVIDER_ERR",
+					Messages: []string{err.Error()},
+				},
 			}).WithMessage("Get Data Failed").WithCode(fiber.StatusBadRequest)
 		}
 	}

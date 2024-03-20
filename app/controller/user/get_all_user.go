@@ -12,15 +12,18 @@ type getAllUser struct {
 }
 
 func (g *getAllUser) Serve(xCtx appctx.Data) appctx.Response {
-	// ctx := xCtx.FiberCtx.Context()
-	// users, err := g.service.ListUser(ctx)
-	// if err != nil {
-	// 	return *appctx.NewResponse().WithError(map[string]interface{}{
-	// 		"Message": "PROVIDER_ERR",
-	// 		"Error":   []string{err.Error()},
-	// 	}).WithMessage(err.Error()).WithCode(fiber.StatusBadRequest)
-	// }
-	return *appctx.NewResponse().WithCode(fiber.StatusNotFound).WithMessage("Resource Not Found")
+	ctx := xCtx.FiberCtx.Context()
+	users, err := g.service.ListUser(ctx)
+	if err != nil {
+		return *appctx.NewResponse().WithError([]appctx.ErrorResp{
+			{
+				Key:      "PROVIDER_ERR",
+				Messages: []string{err.Error()},
+			},
+		}).WithMessage(err.Error()).WithCode(fiber.StatusBadRequest)
+	}
+
+	return *appctx.NewResponse().WithCode(fiber.StatusOK).WithMessage("Success").WithData(users)
 }
 
 func NewGetAllUser(svc service.UserService) contract.Controller {

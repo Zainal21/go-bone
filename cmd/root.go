@@ -3,6 +3,7 @@ package cmd
 import (
 	"log"
 
+	"github.com/Zainal21/go-bone/cmd/broker"
 	"github.com/Zainal21/go-bone/cmd/http"
 	"github.com/Zainal21/go-bone/cmd/migration"
 	"github.com/spf13/cobra"
@@ -26,14 +27,25 @@ func Start() {
 	migrateCmd.Flags().BoolP("verbose", "", false, "enable verbose mode")
 	migrateCmd.Flags().BoolP("guide", "", false, "print help")
 
-	seederCmd := &cobra.Command{
-		Use:   "db:seed",
-		Short: "Run database seeder",
-		Run: func(c *cobra.Command, args []string) {
-			migration.SeedDatabase()
+	rabbitCmd := &cobra.Command{
+		Use:   "rabbit",
+		Short: "Run RabbitMQ Service",
+		Run: func(cmd *cobra.Command, args []string) {
+			broker.ServeRabbitMQ()
 		},
 	}
-	seederCmd.Flags().BoolP("version", "", false, "print version")
+
+	rabbitCmd.Flags().StringP("name", "n", "", "queue and exchange name")
+	rabbitCmd.Flags().StringP("topics", "t", "", "topic to subscribe (separate with pipeline \"|\" if want multiple binding)")
+	rabbitCmd.Flags().BoolP("guide", "", false, "Print Help")
+
+	if err := rabbitCmd.MarkFlagRequired("name"); err != nil {
+		log.Fatal(err)
+	}
+
+	if err := rabbitCmd.MarkFlagRequired("topics"); err != nil {
+		log.Fatal(err)
+	}
 
 	cmd := []*cobra.Command{
 		{
@@ -43,8 +55,8 @@ func Start() {
 				http.Start()
 			},
 		},
+		rabbitCmd,
 		migrateCmd,
-		seederCmd,
 	}
 
 	rootCmd.AddCommand(cmd...)

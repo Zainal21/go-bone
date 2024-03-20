@@ -1,0 +1,15 @@
+{
+  "mongodb_host": "localhost",
+  "mongodb_port": 3306,
+  "mongodb_name": "",
+  "mongodb_user": "",
+  "mongodb_password": "",
+  "mongodb_max_open_conn": 100,
+  "mongodb_max_idle_conn": 10,
+  "mongodb_conn_lifetime": 1,
+  "mongodb_idle_time": 1,
+  "mongodb_tls": false,
+  "mongodb_ca_cert": "",
+  "mongodb_client_cert": "",
+  "mongodb_client_key": ""
+}

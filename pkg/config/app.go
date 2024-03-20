@@ -9,4 +9,9 @@ type AppConfig struct {
 
 	AppLoggerDebug bool   `mapstructure:"app_logger_debug"`
 	AppLoggerLevel string `mapstructure:"app_logger_level"`
+
+	AppOtelTrace    bool   `mapstructure:"app_otel_trace"`
+	AppOtelExporter string `mapstructure:"app_otel_exporter"`
+
+	DistributeTraceConfig `mapstructure:",squash"`
 }
