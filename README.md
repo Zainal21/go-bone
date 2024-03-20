@@ -1,4 +1,4 @@
-# Neo Boilerplate 
+# GoBone Boilerplate
 
 ## Getting started
 
@@ -7,6 +7,7 @@ This is built on top of [Go Fiber](https://docs.gofiber.io) Golang Framework.
 ## Dependencies
 
 There is some dependencies that we used in this skeleton:
+
 - [Go Fiber](https://docs.gofiber.io/) [Go Framework]
 - [Viper](https://github.com/spf13/viper) [Go Configuration]
 - [Cobra](https://github.com/spf13/cobra) [Go Modern CLI]
@@ -22,50 +23,63 @@ There is some dependencies that we used in this skeleton:
 - RabbitMQ
 
 ## Usage
+
 ### Installation
+
 install required dependencies
+
 ```bash
 make install
 ```
 
 ### Run Service
+
 run current service after all dependencies installed
+
 ```bash
 make start
 ```
 
 ## Database Migration
+
 migration up
+
 ```bash
 go run main.go db:migrate up
 ```
 
 migration down
+
 ```bash
 go run main.go db:migrate down
 ```
 
 migration reset
+
 ```bash
 go run main.go db:migrate reset
 ```
 
 migration reset
+
 ```bash
 go run main.go db:migrate reset
 ```
 
 migration redo
+
 ```bash
 go run main.go db:migrate redo
 ```
 
 migration status
+
 ```bash
 go run main.go db:migrate status
 ```
 
 create migration table
+
 ```bash
 go run main.go db:migrate create {table-name} sql
 
@@ -74,6 +88,7 @@ go run main.go db:migrate create users sql
 ```
 
 to show all command
+
 ```bash
 go run main.go db:migrate
 ```
