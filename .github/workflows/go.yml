@@ -30,9 +30,3 @@ jobs:
         uses: securego/gosec@master
         with:
           args: "-no-fail -fmt sarif -out results.sarif ./..."
-
-      - name: Upload SARIF results (optional)
-        if: success()
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: gosec.sarif
