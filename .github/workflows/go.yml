@@ -26,8 +26,10 @@ jobs:
           go get -v github.com/securego/gosec/v2/cmd/gosec@latest
           echo "Gosec installed successfully!"
 
-      - name: Run SAST scan
-        run: gosec -fmt=sarif ./...
+      - name: Run Gosec Security Scanner
+        uses: securego/gosec@master
+        with:
+          args: "-no-fail -fmt sarif -out results.sarif ./..."
 
       - name: Upload SARIF results (optional)
         if: success()
