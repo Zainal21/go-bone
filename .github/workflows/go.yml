@@ -10,24 +10,25 @@ on:
 
 jobs:
   sast:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # Or the desired runner OS
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: 1.23
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.21.3
 
-    - name: Install gosec
-      run: GO111MODULE=on go get -v github.com/securego/gosec/v2/cmd/gosec@latest
+      - name: Install Gosec
+        run: go get -v github.com/securego/gosec/v2/cmd/gosec@latest
 
-    - name: Run SAST scan
-      run: gosec -fmt=sarif ./...
+      - name: Run SAST scan
+        run: gosec -fmt=sarif ./...
 
-    - name: Upload SARIF results
-      uses: github/codeql-action/upload-sarif@v1
-      with:
-        sarif_file: gosec.sarif
+      - name: Upload SARIF results (optional)
+        if: success()
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: gosec.sarif
